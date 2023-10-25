@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 git credentialsId: 'f87a34a8-0e09-45e7-b9cf-6dc68feac670', 
-                url: 'https://github.com/iam-veeramalla/cicd-end-to-end',
+                url: 'https://github.com/avskr06/cicd-end-to-end',
                 branch: 'main'
            }
         }
@@ -26,14 +26,7 @@ pipeline {
                 }
             }
         }
-        stage('Login') {
-          steps {
-              
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                
-              }
-        }
-        
+
         stage('Push the artifacts'){
            steps{
                 script{
@@ -48,7 +41,7 @@ pipeline {
         stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: 'f87a34a8-0e09-45e7-b9cf-6dc68feac670', 
-                url: 'https://github.com/iam-veeramalla/cicd-demo-manifests-repo.git',
+                url: 'https://github.com/avskr06/cicd-demo-manifests-repo.git',
                 branch: 'main'
             }
         }
@@ -64,7 +57,7 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push https://github.com/iam-veeramalla/cicd-demo-manifests-repo.git HEAD:main
+                        git push https://github.com/avskr06/cicd-demo-manifests-repo.git HEAD:main
                         '''                        
                     }
                 }
